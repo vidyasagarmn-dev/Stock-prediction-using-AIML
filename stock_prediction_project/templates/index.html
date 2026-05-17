@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Stock Prediction Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Stock Market Prediction Dashboard</h1>
+
+    {% if selected_company %}
+
+    <h2>
+
+        Company: {{ selected_company }}
+
+    </h2>
+
+    {% endif %}
+
+    <form method="POST">
+
+        <input type="text"
+               name="stock"
+               placeholder="Enter Stock Symbol"
+               required>
+
+        <button type="submit">
+
+            Analyze Stock
+
+        </button>
+
+    </form>
+
+    {% if error %}
+
+        <h3 style="color:red;">
+
+            {{ error }}
+
+        </h3>
+
+    {% endif %}
+
+    {% if prediction %}
+
+    <div class="analytics">
+
+        <h2>Prediction Analytics</h2>
+
+        <p><b>Predicted Next Day Price:</b>
+           $ {{ prediction }}</p>
+
+        <p><b>Current Price:</b>
+           $ {{ current_price }}</p>
+
+        <p><b>Highest Price:</b>
+           $ {{ highest_price }}</p>
+
+        <p><b>Lowest Price:</b>
+           $ {{ lowest_price }}</p>
+
+        <p><b>Average Closing Price:</b>
+           $ {{ average_price }}</p>
+
+        <p><b>Price Change:</b>
+           {{ price_change }} %</p>
+
+        <p><b>Market Trend:</b>
+           {{ trend }}</p>
+
+        <p><b>AI Suggestion:</b>
+           {{ suggestion }}</p>
+
+    </div>
+
+    {% endif %}
+
+    {% if graph %}
+
+    <div class="analytics">
+
+        <h2>Stock Price Graph</h2>
+
+        {{ graph | safe }}
+
+    </div>
+
+    {% endif %}
+
+    {% if pie_chart %}
+
+    <div class="analytics">
+
+        <h2>Stock Market Comparison Pie Chart</h2>
+
+        {{ pie_chart | safe }}
+
+    </div>
+
+    {% endif %}
+
+    {% if data %}
+
+        <h2>Recent Stock Data</h2>
+
+        {{ data | safe }}
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
